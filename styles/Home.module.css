@@ -669,5 +669,27 @@
   align-items: center;
 }
 
+.bg_hightlight {
+  /* background-image: url("backgroundhightlight.jpg"); */
+  padding: 0;
+  background: linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #A259FF 100%);
+}
+.img_hightlight {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  
+}
+.bggggg {
+  background: linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #A259FF 100%),url(../public/homepages/background-hightlight.jpg);
+  background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    width: 100%;
+    padding-top: 50px;
+    margin-bottom: 0;
+}
+
+
 
 

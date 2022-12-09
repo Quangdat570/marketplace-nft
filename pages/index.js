@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap'
 import Link from 'next/link'
 import { IoRocketOutline } from 'react-icons/io5'
+import Carousel from 'react-bootstrap/Carousel';
 
 export default function Home() {
   return (
@@ -360,6 +361,37 @@ export default function Home() {
         </div>
 
       </div>
+    </Container>
+
+    <Container fluid className={styles.bg_hightlight}>
+    {/* <Carousel variant="dark">
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="/homepages/background-hightlight.jpg"
+          alt="First slide"
+          
+        />
+
+
+       
+      </Carousel.Item>
+      
+      
+    </Carousel> */}
+
+    {/* <div>
+      <img src='/homepages/background-hightlight.jpg' className={styles.img_hightlight}></img>
+      <div className={styles.info}>
+        <div className={styles.artst}>
+
+        </div>
+      </div>
+    </div> */}
+
+    <figure className={styles.bggggg}>
+
+    </figure>
     </Container>
 
     </>
