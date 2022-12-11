@@ -11,7 +11,7 @@ const Header = () => {
      {['md'].map((expand) => (
         <Navbar key={expand}   expand={expand} className={styles.background}>
           <Container fluid >
-            <Navbar.Brand href="#" className={styles.logo}>NFT Marketplace</Navbar.Brand>
+            <Navbar.Brand  className={styles.logo}><Link href='/' className='text-decoration-none text-light'>NFT Marketplace</Link></Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -25,7 +25,7 @@ const Header = () => {
               </Offcanvas.Header>
               <Offcanvas.Body className={styles.background}>
                 <Nav className="justify-content-end flex-grow-1 pe-3 align-items-center" >
-                  <Nav.Link href="" className={styles.text}>Marketplace</Nav.Link>
+                  <Nav.Link href="/market" className={styles.text}>Marketplace</Nav.Link>
                   <Nav.Link href="#" className={styles.text}>Rankings</Nav.Link>
                   <Nav.Link href="#" className={styles.text}>Connect a Wallet</Nav.Link>
                   <Nav.Link href="#" >

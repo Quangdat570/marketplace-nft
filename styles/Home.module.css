@@ -51,9 +51,16 @@
    flex-direction: row;
    justify-content: space-around;
   }
+  .btn_mobile {
+    display: none;
+  }
+  .auditional_mobile {
+    display: none;
+  }
 
 }
 @media screen and (min-width:376px) and (max-width:575px) {
+  
   .heading {
     font-size: 28px;
   }
@@ -109,9 +116,21 @@
     width: 60px;
     height: 60px;
   }
+  .btn_mobile {
+    display: none;
+  }
+  .auditional_mobile {
+    display: none;
+  }
 }
 
 @media screen and (min-width:576px) and (max-width:767px) {
+  .btn_mobile {
+    display: none;
+  }
+  .auditional_mobile {
+    display: none;
+  }
   .heading {
     font-size: 28px;
   }
@@ -167,6 +186,9 @@
 }
 
 @media screen and (min-width:768px) and (max-width:991px) {
+  .auditional_mobile {
+    display: flex;
+  }
   .heading {
     font-size: 28px;
   }
@@ -221,6 +243,9 @@
   }
 }
 @media screen and (min-width:992px) and (max-width:1199px) {
+  .auditional_mobile {
+    display: flex;
+  }
   .hero {
     padding: 90px 0px;
   }
@@ -258,7 +283,7 @@
     margin: auto;
   }
   .img_sub_trending {
-    width: 85%;
+    width: 90px;
   }
   .heading_trend {
     font-size: 32px;
@@ -285,6 +310,10 @@
 }
 
 @media screen and (min-width:1200px) {
+  .auditional_mobile {
+    display: flex;
+    padding-top: 20px;
+  }
   .hero {
     padding: 100px 0px;
   }
@@ -335,7 +364,8 @@
 
   }
   .img_sub_trending {
-    width: 85%;
+    width: 115px;
+    height: 115px;
   }
   .heading_trend {
     font-size: 38px;
@@ -363,6 +393,8 @@
   font-family: 'Work Sans', sans-serif;
 
 }
+
+
 
 
 
@@ -439,6 +471,17 @@
 .btn {
   margin-top: 40px;
   margin-bottom: 40px;
+}
+.btn_mobile {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.auditional_mobile {
+  /* display: flex; */
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  color: #fff;
 }
 .auditional {
   display: flex;
@@ -526,11 +569,14 @@
 }
 
 .img_trending {
-  width: 98%;
+  width: 100%;
   border-radius: 30px;
+  /* margin: 30px auto; */
+
 }
 .img_sub_trending {
   border-radius: 30px;
+  
 }
 
 .heading_trend {
@@ -624,10 +670,15 @@
   border-radius: 100%;
 }
 .name_avatar_creator {
+  width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 600;
   font-size: 22px;
   line-height: 140%;
+  height: 30px;
   /* identical to box height, or 31px */
+  -webkit-line-clamp: 1;
 
   text-align: center;
   text-transform: capitalize;
@@ -688,6 +739,46 @@
     width: 100%;
     padding-top: 50px;
     margin-bottom: 0;
+}
+
+.card {
+  /* margin: 30px auto; */
+  /* width: 300px;
+  height: 300px; */
+  border-radius: 40px;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.card .card_image {
+  /* width: inherit;
+  height: inherit; */
+  border-radius: 30px;
+}
+
+.card .card_image img {
+  /* width: inherit;
+  height: inherit; */
+  border-radius: 30px;
+  object-fit: cover;
+}
+.card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+.card_creator {
+  border-radius: 40px;
+  /* box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22); */
+  cursor: pointer;
+  transition: 0.4s;
+}
+.card_creator:hover {
+  transform: scale(0.9, 0.9);
+  /* box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22); */
+
 }
 
 
