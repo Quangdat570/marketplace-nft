@@ -3,7 +3,8 @@ import styles from '../../../styles/homecss/categories.module.css'
 import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap'
 import Link from 'next/link'
 
-const Categories = () => {
+const Categories = ( {categories }) => {
+    
   return (
    <Container fluid className={styles.background}>
     <div className="container">
@@ -11,18 +12,21 @@ const Categories = () => {
             <h3 className={styles.heading}>
             Browse Categories
             </h3>
-            <Col xs={6} lg={3}>
+            {categories.map(cate =>(
+            <Col xs={6} lg={3} key={cate.id}>
                 <Card className={styles.card}>
                     <div className={styles.card_image}>
-                        <Card.Img variant="top" src="/homepages/categori 1.jpg"/>
+                        <Card.Img variant="top" src={cate.thumbnail}/>
                     </div>
                     <Card.Body>
-                        <Card.Title className={styles.title}>Art</Card.Title>
+                        <Card.Title className={styles.title}>{cate.title}</Card.Title>
                     </Card.Body>
                 </Card>
             </Col>
 
-            <Col xs={6} lg={3}>
+            ) )}
+
+            {/* <Col xs={6} lg={3}>
                 <Card className={styles.card}>
                     <div className={styles.card_image}>
                         <Card.Img variant="top" src="/homepages/categori 2.jpg"/>
@@ -97,7 +101,7 @@ const Categories = () => {
                         <Card.Title className={styles.title}>Virtual</Card.Title>
                     </Card.Body>
                 </Card>
-            </Col>
+            </Col> */}
         </Row>
     </div>
 

@@ -11,44 +11,40 @@ import Hightlight from './components/landingpage/Hightlight';
 import Categories from './components/landingpage/Categories';
 import Discover from './components/landingpage/Discover';
 
-export default function Home({games, page, total, totalPage}) {
+export default function Home({games,categories}) {
   return (
     <>
     
     <HeroBanner/>
     <Trending/>
     <Creator games= {games}/>
-    <Categories/>
+    <Categories categories={categories}/>
     <Discover/>
 
     </>
   )
 }
 
-export const getServerSideProps = async (ctx) => {
-  const { page = 1} = ctx.query;
+export const getStaticProps = async (ctx) => {
+ 
 
-  const res = await fetch(
-    "https://free-to-play-games-database.p.rapidapi.com/api/games",
-    {
-      headers: {
-          'X-RapidAPI-Key': '595decacd1msha8c222da77f6b33p150d5ejsnea1ba80e02af',
-  'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com'
-      }
-    }
-  );
+  const res = await fetch("http://localhost:3002/creator");
+  const repon = await fetch("http://localhost:3002/categori")
+  const dataCategori = await repon.json();
+
   const data = await res.json();
 
 
   return {
     props: {
-      page,
-      totalPage: Math.ceil(data.length / 12),
-      total: data.length,
-      games: data.slice((page-1) * 12, page * 12),
-      data,
-      
+      games: data,
+      categories:dataCategori,
     },
+    
   };
+  
 };
+
+
+
 

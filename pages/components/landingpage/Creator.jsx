@@ -6,7 +6,7 @@ import { IoRocketOutline } from 'react-icons/io5'
 import Carousel from 'react-bootstrap/Carousel';
 
 const Creator = ({games}) => {
-    // console.log("game",games)
+    
   return (
     <Container fluid className={styles.background}>
     <div className='container pt-5'>
@@ -27,10 +27,10 @@ const Creator = ({games}) => {
             </div>
           </div>
          
-         {games.map(  item=>(
+         {games.map(  item=>( 
 
           
-          <Col xs={12} md={6} lg={3} className='mb-3' >
+          <Col xs={12} md={6} lg={3} className='mb-3' key={item.id}>
           <div className={styles.card_creator}>
             <Card className={styles.bg_avatar}>
               <Card.Img src={item.thumbnail} className={styles.img_avatar}></Card.Img>
