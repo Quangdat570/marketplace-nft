@@ -3,10 +3,13 @@ import { Container, Row, Col, Card, CardGroup, Carousel } from 'react-bootstrap'
 import Link from 'next/link'
 import styles from '../../styles/marketcss/market.module.css'
 import ListProducts from '../components/marketpage/ListProducts'
-import ProductsList from '../components/marketpage/ProductsList'
 import TopSale from '../components/marketpage/TopSale'
+import SliderColection from '../components/marketpage/Slider'
+import Sell from '../components/marketpage/Sell'
 
-const Index = () => {
+
+const Index = ( { products , page, totalPage, total, data}) => {
+  // console.log("page",page)
   return (
     <>
     <Container fluid className={styles.background} >
@@ -55,11 +58,39 @@ const Index = () => {
 
     </Container>
 
-    <ListProducts/>
+    <ListProducts products={products} page={page} total={total} totalPage={totalPage} />
     <TopSale/>
+    <SliderColection data={data}/>
+    <Sell/>
     
     </>
   )
 }
 
 export default Index
+
+export const getServerSideProps = async (ctx) => {
+  const { page = 1} = ctx.query;
+ 
+
+  const res = await fetch("http://localhost:3002/products");
+ 
+  
+
+  const data = await res.json();
+
+
+  return {
+    props: {
+      page,
+      totalPage: Math.ceil(data.length / 12),
+      total: data.length,
+      data,
+
+      products: data.slice( (page -1) * 12, page * 12),
+      
+    },
+    
+  };
+  
+};

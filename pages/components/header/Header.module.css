@@ -65,3 +65,36 @@ text-align: center;
 
 color: #FFFFFF;
 }
+.search {
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 0 15px;
+    outline: none;
+    transition: 0.4s;
+    padding-right: 35px;
+    height: 40px;
+}
+.name {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 140%;
+    text-align: center;
+    overflow: hidden;
+    transform: scale(1);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s linear;
+    
+}
+.name:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+.layout_header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

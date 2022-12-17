@@ -1,11 +1,21 @@
-import React from 'react'
-import { Container, Row, Col, Navbar, Nav, Offcanvas, NavDropdown, Form, Button, Collapse, Stack } from 'react-bootstrap'
+import React,{useState} from 'react'
+import { Container, Row, Col,Navbar,Offcanvas,Nav} from 'react-bootstrap'
 import Link from 'next/link'
 import styles from './Header.module.css'
 import {BiUser} from 'react-icons/bi'
 import {  BsPerson,BsHandbag  } from "react-icons/bs";
+import { ShoppingCartCheckoutIcon } from '@mui/icons-material'
+
+
+
+
+const pages = ['Marketplace', 'Rangkings', 'Connect Wallet'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Header = () => {
+
+ 
+  
   return (
     <>
      {['md'].map((expand) => (
@@ -25,21 +35,27 @@ const Header = () => {
               </Offcanvas.Header>
               <Offcanvas.Body className={styles.background}>
                 <Nav className="justify-content-end flex-grow-1 pe-3 align-items-center" >
-                  <Nav.Link href="/market" className={styles.text}>Marketplace</Nav.Link>
-                  <Nav.Link href="#" className={styles.text}>Rankings</Nav.Link>
-                  <Nav.Link href="#" className={styles.text}>Connect a Wallet</Nav.Link>
+                  <Nav.Link href="/marketplace" className={styles.text}>Marketplace</Nav.Link>
+                  <Nav.Link href="rankings" className={styles.text}>Rankings</Nav.Link>
+                  <Nav.Link href="/connectwallet" className={styles.text}>Connect a Wallet</Nav.Link>
+                  {/* <form action="">
+                    <input type="search" name="" id="" placeholder='Search' className={styles.search} />
+                  </form> */}
+                  
+                </Nav>
                   <Nav.Link href="#" >
 
                     <div className={styles.button_header}><BiUser/> <span>Login</span></div>
                     </Nav.Link>
-                  
-                </Nav>
                 
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>
         </Navbar>
       ))}
+
+
+
     </>
   )
   

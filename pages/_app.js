@@ -6,18 +6,17 @@ import '../styles/homecss/footer.module.css'
 import '../styles/marketcss/market.module.css'
 import '../styles/marketcss/ListProducts.module.css'
 import '../styles/marketcss/sale.module.css'
-import { Provider } from 'react-redux'
-import store from './components/store/store'
+import '../styles/marketcss/slidercollection.module.css'
+import '../styles/marketcss/Sell.module.css'
+import '../styles/rankingscss/rankings.module.css'
+
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
 
-      <Provider store={store}>
-
       <Component {...pageProps} />
-
-      </Provider>
+      
     </Layout>
   )
 }

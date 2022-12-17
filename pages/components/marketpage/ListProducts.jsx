@@ -23,9 +23,12 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import List from './ListProducts'
-import ProductsList from './ProductsList'
-import { useDispatch, useSelector } from "react-redux";
-import { selectsProducts } from '../store/feautes/Products.slice'
+// import Pagination from '@mui/material/Pagination';
+import Pagination from 'react-bootstrap/Pagination';
+import { useRouter } from 'next/router'
+
+
+
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -73,9 +76,12 @@ const Search = styled('div')(({ theme }) => ({
 
 
 
-const ListProducts = () => {
-    const dispatch = useDispatch();
-    const { data: products } = useSelector(selectsProducts);
+const ListProducts = ( { products, total, totalPage, page }) => {
+    console.log("page",page)
+    console.log("totalpage", totalPage)
+    console.log("total", total)
+    // const dispatch = useDispatch();
+    // const { data: products } = useSelector(selectsProducts);
     
     const [open, setOpen] = useState(false);
     const [value, setValue] = React.useState(37);
@@ -122,6 +128,29 @@ const ListProducts = () => {
       setValue(100);
     }
   };
+
+//   pagenaigation
+// const [pagenavion, setPage] = React.useState(1);
+//   const handleChange = (event, value) => {
+//     setPage(value);
+//   };
+
+let active = 1;
+let items = [];
+for (let number = 1; number <= totalPage; number++) {
+  items.push(
+    <Pagination.Item key={number} active={number == page} onClick={() => {
+        router.push({
+            url:"/products",
+            query: { page: number},
+        });
+    }}>
+      {number}
+    </Pagination.Item>,
+  );
+}
+const router = useRouter();
+
 
     
 
@@ -241,7 +270,41 @@ const ListProducts = () => {
                     </Collapse>
                 </Col>
 
-                <Col xs={12} sm={6} lg={3}>
+                {products.map((item) => (
+                <Col xs={12} sm={6} lg={3} key={item.id}>
+                <Card className={styles.card} >
+                    <div className={styles.card_image}>
+                        <Card.Img variant="top" src={item.thumbnail}/>
+                    </div>
+                    <Card.Body className='ps-4 pe-4'>
+                        <Card.Title className={styles.title}>{item.title}</Card.Title>
+                        <div className='d-flex gap-3 pb-4 pt-1'>
+                           <img src="homepages/avatar trend 1.jpg" alt="" className={styles.img_discover} />
+                           <div className={styles.name_avatar}>NFT Artist</div>
+                        </div>
+                        <div className='d-flex justify-content-between'>
+                            <div className={styles.discover_price}>
+                                <div className={styles.name_price}>Price</div>
+                                <div className={styles.price}>1.63 ETH</div>
+                            </div>
+                            <div className="highness">
+                                <div className={styles.name_highness}>Highest Bid</div>
+                                <div className={styles.price_highness}>0.33 wETH</div>
+                            </div>
+                        </div>
+                    </Card.Body>
+                </Card>
+                </Col>
+
+                ))}
+                
+                    <Col className='justify-content-center d-flex' xs={12}>
+                    <Pagination >{items}</Pagination>
+                    </Col>
+                
+
+
+                {/* <Col xs={12} sm={6} lg={3}>
                 <Card className={styles.card}>
                     <div className={styles.card_image}>
                         <Card.Img variant="top" src="/homepages/discover 1.jpg"/>
@@ -514,32 +577,7 @@ const ListProducts = () => {
                         </div>
                     </Card.Body>
                 </Card>
-                </Col>
-
-                <Col xs={12} sm={6} lg={3}>
-                <Card className={styles.card}>
-                    <div className={styles.card_image}>
-                        <Card.Img variant="top" src="/homepages/discover 1.jpg"/>
-                    </div>
-                    <Card.Body className='ps-4 pe-4'>
-                        <Card.Title className={styles.title}>Distant Galaxy</Card.Title>
-                        <div className='d-flex gap-3 pb-4 pt-1'>
-                           <img src="homepages/avatar trend 1.jpg" alt="" className={styles.img_discover} />
-                           <div className={styles.name_avatar}>NFT Artist</div>
-                        </div>
-                        <div className='d-flex justify-content-between'>
-                            <div className={styles.discover_price}>
-                                <div className={styles.name_price}>Price</div>
-                                <div className={styles.price}>1.63 ETH</div>
-                            </div>
-                            <div className="highness">
-                                <div className={styles.name_highness}>Highest Bid</div>
-                                <div className={styles.price_highness}>0.33 wETH</div>
-                            </div>
-                        </div>
-                    </Card.Body>
-                </Card>
-                </Col>
+                </Col> */}
 
 
                 {/* <ProductsList products={products} /> */}
