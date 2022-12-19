@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './Header'
 import Footer from '../footer/Footer'
-import Headerrrr from './Test'
+import TemporaryDrawer from './Test'
 
 const Layout = (props) => {
   return (
     <div>
-        <Header/>
+        <TemporaryDrawer/>
         {props.children}
         <Footer/>
     </div>

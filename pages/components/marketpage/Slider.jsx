@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from '../../../styles/marketcss/slidercollection.module.css'
 import { BsFillArrowLeftSquareFill,BsFillArrowRightSquareFill } from 'react-icons/bs'
 import { IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
-import { SmoothHorzion } from './ulti';
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -33,6 +33,7 @@ const SliderColection = ({data}) => {
     //     slidesPerView: 4,
     //     navigation: true,
     // };
+    
    
    
   return (
