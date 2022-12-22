@@ -31,18 +31,23 @@ const Creator = ({games}) => {
 
           
           <Col xs={12} md={6} lg={3} className='mb-3' key={item.id}>
-          <div className={styles.card_creator}>
-            <Card className={styles.bg_avatar}>
-              <Card.Img src={item.thumbnail} className={styles.img_avatar}></Card.Img>
-              <div className='d-flex flex-column '>
-                    <div className={styles.name_avatar_creator}>{item.title}</div>
-                    <div className='d-flex gap-2 align-items-center justify-content-center'>
-                      <div className={styles.total}>Total Sales:</div>
-                      <div className={styles.price}>34.53 ETH</div>
+          <Link href={{
+            pathname:'creator/[pcreator]',
+            query: {pcreator: item.id}
+          }} className='text-decoration-none'>
+            <div className={styles.card_creator}>
+              <Card className={styles.bg_avatar}>
+                <Card.Img src={item.thumbnail} className={styles.img_avatar}></Card.Img>
+                <div className='d-flex flex-column '>
+                      <div className={styles.name_avatar_creator}>{item.title}</div>
+                      <div className='d-flex gap-2 align-items-center justify-content-center'>
+                        <div className={styles.total}>Total Sales:</div>
+                        <div className={styles.price}>34.53 ETH</div>
+                      </div>
                     </div>
-                  </div>
-            </Card>
-          </div>
+              </Card>
+            </div>
+          </Link>
 
           </Col>
 

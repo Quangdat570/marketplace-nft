@@ -272,7 +272,10 @@ const router = useRouter();
 
                 {products.map((item) => (
                 <Col xs={12} sm={6} lg={3} key={item.id}>
-                <Link href='/products/ProductsDetail' className='text-decoration-none'>
+                <Link href={{
+                    pathname:'products/marketpage/[pid]',
+                    query: { pid: item.id}
+                }} className='text-decoration-none'>
                     <Card className={styles.card} >
                         <div className={styles.card_image}>
                             <Card.Img variant="top" src={item.thumbnail}/>

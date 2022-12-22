@@ -2,10 +2,11 @@ import React from 'react'
 import { Container, Row, Col, Card, CardGroup, Carousel } from 'react-bootstrap'
 import Link from 'next/link'
 import styles from '../../styles/marketcss/market.module.css'
-import ListProducts from '../components/marketpage/ListProducts'
-import TopSale from '../components/marketpage/TopSale'
-import SliderColection from '../components/marketpage/Slider'
-import Sell from '../components/marketpage/Sell'
+import ListProducts from './marketpage/ListProducts'
+import TopSale from './marketpage/TopSale'
+import SliderColection from './marketpage/Slider'
+import Sell from './marketpage/Sell'
+
 
 
 const Index = ( { products , page, totalPage, total, data}) => {

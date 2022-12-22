@@ -10,7 +10,7 @@ import { ShoppingCartCheckoutIcon } from '@mui/icons-material'
 
 
 const pages = ['Marketplace', 'Rangkings', 'Connect Wallet'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout', 'Cart'];
 
 const Header = () => {
 
@@ -35,7 +35,7 @@ const Header = () => {
               </Offcanvas.Header>
               <Offcanvas.Body className={styles.background}>
                 <Nav className="justify-content-end flex-grow-1 pe-3 align-items-center" >
-                  <Nav.Link href="/marketplace" className={styles.text}>Marketplace</Nav.Link>
+                  <Nav.Link href="/products" className={styles.text}>Marketplace</Nav.Link>
                   <Nav.Link href="rankings" className={styles.text}>Rankings</Nav.Link>
                   <Nav.Link href="/connectwallet" className={styles.text}>Connect a Wallet</Nav.Link>
                   {/* <form action="">

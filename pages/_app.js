@@ -10,13 +10,17 @@ import '../styles/marketcss/slidercollection.module.css'
 import '../styles/marketcss/Sell.module.css'
 import '../styles/rankingscss/rankings.module.css'
 import '../styles/marketcss/products-detail.module.css'
+import { Provider } from 'react-redux'
+import store from '../store'
 
 
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
+      <Provider store={store}>
 
       <Component {...pageProps} />
+      </Provider>
       
     </Layout>
   )
