@@ -77,9 +77,7 @@ const Search = styled('div')(({ theme }) => ({
 
 
 const ListProducts = ( { products, total, totalPage, page }) => {
-    console.log("page",page)
-    console.log("totalpage", totalPage)
-    console.log("total", total)
+    
     // const dispatch = useDispatch();
     // const { data: products } = useSelector(selectsProducts);
     
@@ -273,7 +271,7 @@ const router = useRouter();
                 {products.map((item) => (
                 <Col xs={12} sm={6} lg={3} key={item.id}>
                 <Link href={{
-                    pathname:'products/marketpage/[pid]',
+                    pathname:'products/[pid]',
                     query: { pid: item.id}
                 }} className='text-decoration-none'>
                     <Card className={styles.card} >

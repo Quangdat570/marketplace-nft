@@ -3,8 +3,11 @@ import { Container, Row, Col, Card, CardGroup } from 'react-bootstrap'
 import styles from './creatorInfo.module.css'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch,useSelector } from 'react-redux';
 
-const CreatorInfo = () => {
+const CreatorInfo = ({product}) => {
+  console.log("product", product)
+  const dispatch = useDispatch();
   return (
     <>
     <Container fluid className={styles.background}>
@@ -41,3 +44,41 @@ const CreatorInfo = () => {
 }
 
 export default CreatorInfo
+
+export const getStaticProps = async (context) => {
+  const id = context.params.pcreator;
+  const res = await fetch("http://localhost:3002/creator/" + id);
+  const repon = await fetch("http://localhost:3002/products");
+  const dataRepon = await repon.json();
+  const product = await res.json();
+
+  return {
+    props: {
+      id,
+      product,
+      
+      dataRepon: dataRepon.slice(68),
+      
+    },
+  };
+};
+
+
+export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3002/creator");
+  const data = await res.json();
+
+  const paths = data.map((product) => {
+    return {
+      params: { pcreator: product.id.toString() },
+    };
+  });
+
+  return {
+   
+    paths,
+
+    fallback: false,
+   
+  };
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Card, CardGroup, Carousel } from 'react-bootstrap'
-import styles from '../../../styles/marketcss/products-detail.module.css'
+import styles from '../../styles/marketcss/products-detail.module.css'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
 import { HiOutlineShoppingBag } from 'react-icons/hi'
 import Link from 'next/link'
@@ -25,6 +25,10 @@ import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../store/features/cart/cart.slice";
+import { useParams } from "react-router-dom";
 
 // import { useDispatch,useSelector } from 'react-redux'
 // import { useParams } from 'react-router-dom'
@@ -113,12 +117,22 @@ function a11yProps(index) {
 
 // content -------------------------------------------------
 
-const ProductsDetail = ( {product}) => {
-  console.log(product)
-  // const { productId } = useParams();
-  // const product = useSelector(selectProductById(productId));
-  // const dispatch = useDispatch();
-
+const ProductsDetail = ( {product, dataRepon}) => {
+  console.log("product",product)
+  console.log("data",dataRepon)
+  
+  
+  const dispatch = useDispatch();
+  const handleClick = (productId) => {
+    console.log(productId);
+    dispatch(
+      addItem({
+        productId: productId,
+        quantity: 1,
+      })
+    );
+  };  
+  
   const [value, setValue] = React.useState(0);
 
 
@@ -161,7 +175,7 @@ const ProductsDetail = ( {product}) => {
         <div className="container">
           <Row>
               <Col xs={12} md={6}>
-               <img src="/market-img/products 11.jpg" alt="" className={styles.img_header} />
+               <img src={product.thumbnail} alt="" className={styles.img_header} />
           
               </Col>
               <Col xs={12} md={6}>
@@ -313,8 +327,9 @@ const ProductsDetail = ( {product}) => {
                     </TabPanel>
                   </Box >
                   <div className={styles.btn}>
-                    <button className={styles.btn_buy}>Buy Now</button>
+                    <button className={styles.btn_buy} onClick={() => handleClick(product.id)}>Buy Now</button>
                     <button className={styles.btn_bid} onClick={handleOpen} >Place Bid</button>
+                    <button><Link href='/cart'>cart</Link></button>
                     <Modal
                       open={open}
                       onClose={handleClose}
@@ -374,8 +389,40 @@ const ProductsDetail = ( {product}) => {
                 <div className={styles.recent_view}>Recent View</div>
               </Col>
              
+                  {dataRepon.map((item) => (
+                <Col xs={12} sm={6} lg={4} key={item.id}>
+                <Link href={{
+                  pathname: '/products/[pid]',
+                  query: { pid: item.id}
+                }} className='text-decoration-none'>
+                    <Card className={styles.card} >
+                        <div className={styles.card_image}>
+                            <Card.Img variant="top" src={item.thumbnail} />
+                        </div>
+                        <Card.Body className='ps-4 pe-4'>
+                            <Card.Title className={styles.title}>{item.title}</Card.Title>
+                            <div className='d-flex gap-3 pb-4 pt-1'>
+                               <img src="homepages/avatar trend 1.jpg" alt="" className={styles.img_discover} />
+                               <div className={styles.name_avatar}>NFT Artist</div>
+                            </div>
+                            <div className='d-flex justify-content-between'>
+                                <div className={styles.discover_price}>
+                                    <div className={styles.name_price}>Price</div>
+                                    <div className={styles.price}>1.63 ETH</div>
+                                </div>
+                                <div className="highness">
+                                    <div className={styles.name_highness}>Highest Bid</div>
+                                    <div className={styles.price_highness}>0.33 wETH</div>
+                                </div>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                </Link>
+                </Col>
 
-                <Col xs={12} sm={6} lg={4} >
+                  ))}
+
+                {/* <Col xs={12} sm={6} lg={4} >
                 <Link href='/products/ProductsDetail' className='text-decoration-none'>
                     <Card className={styles.card} >
                         <div className={styles.card_image}>
@@ -427,34 +474,7 @@ const ProductsDetail = ( {product}) => {
                         </Card.Body>
                     </Card>
                 </Link>
-                </Col>
-
-                <Col xs={12} sm={6} lg={4} >
-                <Link href='/products/ProductsDetail' className='text-decoration-none'>
-                    <Card className={styles.card} >
-                        <div className={styles.card_image}>
-                            <Card.Img variant="top" src="/market-img/products 1.jpg" />
-                        </div>
-                        <Card.Body className='ps-4 pe-4'>
-                            <Card.Title className={styles.title}>asdasdasd</Card.Title>
-                            <div className='d-flex gap-3 pb-4 pt-1'>
-                               <img src="homepages/avatar trend 1.jpg" alt="" className={styles.img_discover} />
-                               <div className={styles.name_avatar}>NFT Artist</div>
-                            </div>
-                            <div className='d-flex justify-content-between'>
-                                <div className={styles.discover_price}>
-                                    <div className={styles.name_price}>Price</div>
-                                    <div className={styles.price}>1.63 ETH</div>
-                                </div>
-                                <div className="highness">
-                                    <div className={styles.name_highness}>Highest Bid</div>
-                                    <div className={styles.price_highness}>0.33 wETH</div>
-                                </div>
-                            </div>
-                        </Card.Body>
-                    </Card>
-                </Link>
-                </Col>
+                </Col> */}
           </Row>
         </div>
     </Container>
@@ -465,35 +485,40 @@ const ProductsDetail = ( {product}) => {
 export default ProductsDetail
 
 
-// export const getStaticProps = async (context) => {
-  
-//   const res = await fetch(
-//     "https://localhost:3002/products" + context.params.pid,
-    
-//   );
-//   const product = await res.json();
+export const getStaticProps = async (context) => {
+  const id = context.params.pid;
+  const res = await fetch("http://localhost:3002/products/" + id);
+  const repon = await fetch("http://localhost:3002/products");
+  const dataRepon = await repon.json();
+  const product = await res.json();
 
-//   return {
-//     props: {
-//       product,
-//     },
-//   };
-// };
+  return {
+    props: {
+      id,
+      product,
+      
+      dataRepon: dataRepon.slice(68),
+      
+    },
+  };
+};
 
 
-// export async function getStaticPaths() {
-//   const res = await fetch("https://localhost:3002/products");
-//   const data = await res.json();
+export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3002/products");
+  const data = await res.json();
 
-//   const paths = data.map((product) => {
-//     return { 
-//       params: { pid: product.id.toString()},
-//     };
-//   })
-  
+  const paths = data.map((product) => {
+    return {
+      params: { pid: product.id.toString() },
+    };
+  });
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+  return {
+   
+    paths,
+
+    fallback: false,
+   
+  };
+}

@@ -16,13 +16,13 @@ import store from '../store'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Provider store={store}>
 
+    <Provider store={store}>
+    <Layout>
       <Component {...pageProps} />
-      </Provider>
-      
     </Layout>
+
+    </Provider>
   )
 }
 

@@ -10,7 +10,7 @@ import Sell from './marketpage/Sell'
 
 
 const Index = ( { products , page, totalPage, total, data}) => {
-  // console.log("page",page)
+  
   return (
     <>
     <Container fluid className={styles.background} >
