@@ -31,10 +31,7 @@ const Creator = ({games}) => {
 
           
           <Col xs={12} md={6} lg={3} className='mb-3' key={item.id}>
-          <Link href={{
-            pathname:'creator/[pcreator]',
-            query: {pcreator: item.id}
-          }} className='text-decoration-none'>
+          <Link href='' className='text-decoration-none'>
             <div className={styles.card_creator}>
               <Card className={styles.bg_avatar}>
                 <Card.Img src={item.thumbnail} className={styles.img_avatar}></Card.Img>
