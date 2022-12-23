@@ -118,13 +118,12 @@ function a11yProps(index) {
 // content -------------------------------------------------
 
 const ProductsDetail = ( {product, dataRepon}) => {
-  console.log("product",product)
-  console.log("data",dataRepon)
+ 
   
   
   const dispatch = useDispatch();
   const handleClick = (productId) => {
-    console.log(productId);
+    
     dispatch(
       addItem({
         productId: productId,
@@ -145,10 +144,7 @@ const ProductsDetail = ( {product, dataRepon}) => {
 
 
 
-//   const handleAddToCartClick = () => {
-//     dispatch(addItem({ productId: product.id, quantity: 1 }));
-//     toast("Thêm sản phẩm vào giỏ hàng thành cmn công");
-// };
+
 
  
   return (
@@ -329,7 +325,7 @@ const ProductsDetail = ( {product, dataRepon}) => {
                   <div className={styles.btn}>
                     <button className={styles.btn_buy} onClick={() => handleClick(product.id)}>Buy Now</button>
                     <button className={styles.btn_bid} onClick={handleOpen} >Place Bid</button>
-                    <button><Link href='/cart'>cart</Link></button>
+                    
                     <Modal
                       open={open}
                       onClose={handleClose}

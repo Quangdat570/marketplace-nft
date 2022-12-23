@@ -87,15 +87,13 @@ export const selectCart = (state) => {
     product: products.find((product) => product.id == item.productId),
     quantity: item.quantity,
   }));
-  
 
   return {
     items,
-
+    products,
     incQty,
     decQty,
     removeItem,
     clearItem,
   };
- 
 };

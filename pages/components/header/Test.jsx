@@ -35,10 +35,14 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 
+import { useDispatch, useSelector } from "react-redux";
+import { selectCart } from '../../../store/features/cart/cart.slice';
+
+
 
 const style = {
   position: 'absolute',
-  top: '10%',
+  top: '7%',
   right: '5%',
   bottom:'5%',
   
@@ -58,6 +62,24 @@ const pages = ['marketplace', 'wankings', 'wallet'];
 const settings = ['Cart','Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+
+  const { items, products, totalPrice, incQty, decQty, removeItem, clearItem } =
+  useSelector(selectCart);
+  const dispatch = useDispatch();
+  
+
+  const handleDelete = (productId) => {
+    if (confirm("Xoas sanr pham?")) {
+      dispatch(removeItem(productId));
+    }
+  };
+
+  const handleClear = () => {
+    if (confirm("Xoa toan bo san pham khoi gio hang")) {
+      dispatch(clearItem());
+    }
+  };
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -263,17 +285,26 @@ function ResponsiveAppBar() {
                      <Typography sx={{color:'#04111D', fontWeight:'600'}}>item</Typography>
                      <Typography sx={{color:'#04111D', fontWeight:'600', cursor:'pointer'}}>Clear all</Typography>
                     </Typography>
-                    <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center', mt:2,borderBottom:1, pb:2 , borderColor:"#acacac"}}>
-                      <ImageListItem sx={{width:'72px', height:'72px'}}>
-                        <img src='/market-img/products 1.jpg' className='rounded '/>
-                      </ImageListItem>
-                      <Box sx={{display:'flex', flexDirection:'column', padding:'0px 10px'}}>
-                        <Typography sx={{fontSize:'14px', fontFamily:'Poppins', fontWeight:'600', overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis', width:'100px'}}>Unrevealed Ecotar #924</Typography>
-                        <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>Ecotars 3D</Typography>
-                        <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>ETH</Typography>
+                    {( items.length === 0) ? <Box>
+                      <Typography>Hãy thêm sản phẩm vào giỏ hàng</Typography>
+                    </Box> : 
+                    <Box sx={{height:'194px', overflow:'scroll'}}>
+                      {items.map((item) => (
+                      <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center', mt:2,borderBottom:1, pb:2 , borderColor:"#acacac"}} key={item.id}>
+                        <ImageListItem sx={{width:'72px', height:'72px'}}>
+                          <img src={item.product.thumbnail} className='rounded '/>
+                        </ImageListItem>
+                        <Box sx={{display:'flex', flexDirection:'column', padding:'0px 10px'}}>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins', fontWeight:'600', overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis', width:'100px'}}>{item.product.title}</Typography>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>Ecotars 3D</Typography>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>ETH</Typography>
+                        </Box>
+                        <Button sx={{color:'#333'}} onClick={() => handleDelete(item.product.id)}> <DeleteOutlineIcon/></Button>
                       </Box>
-                      <Button sx={{color:'#333'}}> <DeleteOutlineIcon/></Button>
+                      ))}
                     </Box>
+
+                    }
                     <Typography id="modal-modal-description" sx={{ mt: 2, display:'flex' , justifyContent:'space-between', fontFamily:'Poppins', color:'#04111D', fontWeight:'600' }}>
                      <div>Total Price</div>
                      <div>0 ETH</div>
@@ -298,7 +329,7 @@ function ResponsiveAppBar() {
                       </RadioGroup>
                     </FormControl>
 
-                    <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', mt:3}}>
+                    <Box sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                     <Button variant="contained" >Complete purchase</Button>
 
                     </Box>
