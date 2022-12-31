@@ -179,7 +179,7 @@ function ResponsiveAppBar() {
               
             }}
           >
-            NFTs Marketplace
+            NFTs 
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -263,14 +263,84 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open Cart">
-              <IconButton onClick={handleOpen} sx={{ p: 0 }}>
-                
-                <AddShoppingCartIcon sx={{color:'#fff'}}/>
-                
-              </IconButton>
-            </Tooltip>
-            <Modal
+            
+
+            {['right'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Button onClick={toggleDrawer(anchor, true)}><AddShoppingCartIcon sx={{color:'#fff'}}/></Button>
+          <SwipeableDrawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
+          >
+            <Box  sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 330, padding:'20px' }}
+                  role="presentation"
+                  onClick={toggleDrawer(anchor, false)}
+                  onKeyDown={toggleDrawer(anchor, false)}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2" sx={{borderBottom:1, pb:2 , borderColor:"#acacac"}}>
+                      You Cart
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2, display:'flex' , justifyContent:'space-between', fontFamily:'Poppins', color:'#04111D', fontWeight:'600' }}>
+                     <Typography sx={{color:'#04111D', fontWeight:'600'}}>item</Typography>
+                     <Typography sx={{color:'#04111D', fontWeight:'600', cursor:'pointer'}}>Clear all</Typography>
+                  </Typography>
+
+                  {( items.length === 0) ? <Box>
+                      <Typography>Hãy thêm sản phẩm vào giỏ hàng</Typography>
+                    </Box> : 
+                    <Box sx={{height:'194px', overflow:'scroll'}}>
+                      {items.map((item) => (
+                      <Box sx={{display:'flex', justifyContent:'space-between', alignItems:'center', mt:2,borderBottom:1, pb:2 , borderColor:"#acacac"}} key={item.id}>
+                        <ImageListItem sx={{width:'72px', height:'72px'}}>
+                          <img src={item.product.thumbnail} className='rounded '/>
+                        </ImageListItem>
+                        <Box sx={{display:'flex', flexDirection:'column', padding:'0px 10px'}}>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins', fontWeight:'600', overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis', width:'100px'}}>{item.product.title}</Typography>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>Ecotars 3D</Typography>
+                          <Typography sx={{fontSize:'14px', fontFamily:'Poppins'}}>ETH</Typography>
+                        </Box>
+                        <Button sx={{color:'#333'}} onClick={() => handleDelete(item.product.id)}> <DeleteOutlineIcon/></Button>
+                      </Box>
+                      ))}
+                    </Box>
+                    }
+
+                    <Typography id="modal-modal-description" sx={{ mt: 2, display:'flex' , justifyContent:'space-between', fontFamily:'Poppins', color:'#04111D', fontWeight:'600' }}>
+                     <div>Total Price</div>
+                     <div>0 ETH</div>
+                    </Typography>
+                    <Box sx={{ display:'flex' , justifyContent:'space-between', fontFamily:'Poppins', color:'#04111D', mt:4 }}>
+                      <Typography>
+                      Payment method
+                      </Typography>
+                      <Typography>Crypto</Typography>
+                     
+                    </Box>
+
+                    <FormControl>
+                      
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        defaultValue="female"
+                        name="radio-buttons-group"
+                      >
+                        <FormControlLabel value="crypto" control={<Radio /> } label="Crypto" />
+                        <FormControlLabel value="credit" control={<Radio />} label="Credit or debit card" />
+                        
+                      </RadioGroup>
+                    </FormControl>
+
+                    <Box sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <Button variant="contained" >Complete purchase</Button>
+
+                    </Box>
+              
+            </Box>
+          </SwipeableDrawer>
+        </React.Fragment>
+      ))}
+            {/* <Modal
                   open={open}
                   onClose={handleClose}
                   aria-labelledby="modal-modal-title"
@@ -336,7 +406,7 @@ function ResponsiveAppBar() {
 
                   </Box>
                   
-                </Modal>
+            </Modal> */}
            
           </Box>
         </Toolbar>

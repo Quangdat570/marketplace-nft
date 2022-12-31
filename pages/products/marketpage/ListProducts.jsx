@@ -84,10 +84,13 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
+
+
+// ------------------------------------------------------------------------------------------------------------------------
+
 const ListProducts = ({  filter }) => {
   const { products, filterChanged,pageChanged,currentPage,totalPage,total } = useSelector(selectProductsList);
-  console.log("product",products)
-  console.log("total", total)
+ 
   const dispatch = useDispatch();
   const filterRef = useRef();
   const items = [];

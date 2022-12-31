@@ -92,6 +92,7 @@ export const selectProductsList = (state) => {
         currentPage: state.products.currentPage,
         totalPage,
         
+        
        
     };
 };
